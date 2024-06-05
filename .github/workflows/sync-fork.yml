@@ -8,9 +8,7 @@ on:
 
 jobs:
   sync:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: tgymnich/fork-sync@master
         with:
@@ -18,5 +16,10 @@ jobs:
           base: arch-mainline
           head: mainline
           merge_method: rebase
+      - uses: tgymnich/fork-sync@master
+        with:
+          owner: Ahuge
+          base: mainline
+          head: mainline
  
           
