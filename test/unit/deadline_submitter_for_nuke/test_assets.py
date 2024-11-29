@@ -37,6 +37,8 @@ def _activated_reading_write_node_knobs(knob_name: str):
     return_value=["/one/asset.png", "/two/asset.png"],
 )
 @patch("deadline.nuke_util.ocio.is_custom_config_enabled", return_value=False)
+@patch("deadline.nuke_util.ocio.is_stock_config_enabled", return_value=False)
+@patch("deadline.nuke_util.ocio.is_OCIO_enabled", return_value=False)
 @patch(
     "deadline.nuke_util.ocio.get_custom_config_path",
     return_value="/this/ocio_configs/config.ocio",
@@ -48,6 +50,8 @@ def _activated_reading_write_node_knobs(knob_name: str):
 def test_get_scene_asset_references(
     mock_get_config_absolute_search_paths: Mock,
     mock_get_custom_config_path: Mock,
+    mock_is_OCIO_enabled: Mock,
+    mock_is_stock_config_enabled: Mock,
     mock_is_custom_config_enabled: Mock,
     mock_get_node_filenames: Mock,
     mock_get_nuke_script_file: Mock,
@@ -95,10 +99,11 @@ def test_get_scene_asset_references(
 
     nuke.allNodes.return_value = []
     mock_is_custom_config_enabled.return_value = True
+    mock_is_OCIO_enabled.return_value = True
+    mock_is_stock_config_enabled.return_value = False
 
     # WHEN
     results = get_scene_asset_references()
-
     # THEN
     assert expected_script_file in results.input_filenames
     assert expected_ocio_config_path in results.input_filenames

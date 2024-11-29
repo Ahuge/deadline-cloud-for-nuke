@@ -43,20 +43,12 @@ class SceneSettingsWidget(QWidget):
         lyt = QGridLayout(self)
 
         self.write_node_box = QComboBox(self)
-        self.write_node_box.addItem("All Write Nodes", None)
-        for write_node in sorted(
-            find_all_write_nodes(), key=lambda write_node: write_node.fullName()
-        ):
-            # Set data value as fullName since this is the value we want to store in the settings
-            self.write_node_box.addItem(write_node.fullName(), write_node.fullName())
-
+        self._rebuild_write_node_drop_down()
         lyt.addWidget(QLabel("Write Nodes"), 0, 0)
         lyt.addWidget(self.write_node_box, 0, 1, 1, -1)
 
         self.views_box = QComboBox(self)
-        self.views_box.addItem("All Views", "")
-        for view in sorted(nuke.views()):
-            self.views_box.addItem(view, view)
+        self._rebuild_views_drop_down()
         lyt.addWidget(QLabel("Views"), 1, 0)
         lyt.addWidget(self.views_box, 1, 1, 1, -1)
 
@@ -83,6 +75,9 @@ class SceneSettingsWidget(QWidget):
         self.timeouts_box = QGroupBox()
         timeouts_lyt = QGridLayout(self.timeouts_box)
         lyt.addWidget(self.timeouts_box, 5, 0, 1, -1)
+
+        self.gizmos_checkbox = QCheckBox("Include Gizmos In Job Bundle", self)
+        lyt.addWidget(self.gizmos_checkbox, 6, 0)
 
         def create_timeout_row(label, tooltip, row):
             qlabel = QLabel(label)
@@ -135,7 +130,7 @@ class SceneSettingsWidget(QWidget):
             self.include_adaptor_wheels = QCheckBox(
                 "Developer Option: Include Adaptor Wheels", self
             )
-            lyt.addWidget(self.include_adaptor_wheels, 6, 0, 1, 2)
+            lyt.addWidget(self.include_adaptor_wheels, 7, 0, 1, 2)
 
         lyt.addItem(QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding), 7, 0)
 
@@ -181,6 +176,21 @@ class SceneSettingsWidget(QWidget):
             + timeout_boxes[3].value() * 60
         )
 
+    def _rebuild_write_node_drop_down(self) -> None:
+        self.write_node_box.clear()
+        self.write_node_box.addItem("All Write Nodes", None)
+        for write_node in sorted(
+            find_all_write_nodes(), key=lambda write_node: write_node.fullName()
+        ):
+            # Set data value as fullName since this is the value we want to store in the settings
+            self.write_node_box.addItem(write_node.fullName(), write_node.fullName())
+
+    def _rebuild_views_drop_down(self) -> None:
+        self.views_box.clear()
+        self.views_box.addItem("All Views", "")
+        for view in sorted(nuke.views()):
+            self.views_box.addItem(view, view)
+
     @property
     def on_run_timeout_seconds(self):
         return self._calculate_timeout_seconds(self.on_run_timeouts)
@@ -198,13 +208,19 @@ class SceneSettingsWidget(QWidget):
         self.frame_override_txt.setEnabled(settings.override_frame_range)
         self.frame_override_txt.setText(settings.frame_list)
 
+        self._rebuild_write_node_drop_down()
         index = self.write_node_box.findData(settings.write_node_selection)
         if index >= 0:
             self.write_node_box.setCurrentIndex(index)
+        else:
+            self.write_node_box.setCurrentIndex(0)
 
+        self._rebuild_views_drop_down()
         index = self.views_box.findData(settings.view_selection)
         if index >= 0:
             self.views_box.setCurrentIndex(index)
+        else:
+            self.views_box.setCurrentIndex(0)
 
         self.proxy_mode_check.setChecked(settings.is_proxy_mode)
 
@@ -244,6 +260,8 @@ class SceneSettingsWidget(QWidget):
         settings.on_run_timeout_seconds = self.on_run_timeout_seconds
         settings.on_enter_timeout_seconds = self.on_enter_timeout_seconds
         settings.on_exit_timeout_seconds = self.on_exit_timeout_seconds
+
+        settings.include_gizmos_in_job_bundle = self.gizmos_checkbox.isChecked()
 
         if self.developer_options:
             settings.include_adaptor_wheels = self.include_adaptor_wheels.isChecked()
