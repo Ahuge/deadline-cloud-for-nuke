@@ -2,6 +2,9 @@
 [![python](https://img.shields.io/pypi/pyversions/deadline-cloud-for-nuke.svg?style=flat)](https://pypi.python.org/pypi/deadline-cloud-for-nuke)
 [![license](https://img.shields.io/pypi/l/deadline-cloud-for-nuke.svg?style=flat)](https://github.com/aws-deadline/deadline-cloud-for-nuke/blob/mainline/LICENSE)
 
+# Arch Updates
+- Naive callback loader for a VFX customer that needs to convert their sgtk nodes before going to the farm (Better solution in DEADLINE-CLOUD could be written)
+
 # AWS Deadline Cloud for Nuke
 
 AWS Deadline Cloud for Nuke is a python package that allows users to create [AWS Deadline Cloud][deadline-cloud] jobs from within Nuke. Using the [Open Job Description (OpenJD) Adaptor Runtime][openjd-adaptor-runtime] this package also provides a command line application that adapts Nuke's command line interface to support the [OpenJD specification][openjd].
@@ -31,7 +34,10 @@ The Nuke Adaptor implements the [OpenJD][openjd-adaptor-runtime] interface that 
 * sticky rendering, where the application stays open between tasks,
 * path mapping, that enables cross-platform rendering
 
-Jobs created by the submitter use this adaptor by default.
+Jobs created by the submitter use this adaptor by default, and that both the installed adaptor
+and the Nuke executable be available on the PATH of the user that will be running your jobs.
+
+Or you can set the `NUKE_EXECUTABLE` to point to the Nuke executable.
 
 ### Getting Started
 
@@ -49,13 +55,13 @@ For more information on the commands the OpenJD adaptor runtime provides, see [h
 
 ## Versioning
 
-This package's version follows [Semantic Versioning 2.0](https://semver.org/), but is still considered to be in its 
+This package's version follows [Semantic Versioning 2.0](https://semver.org/), but is still considered to be in its
 initial development, thus backwards incompatible versions are denoted by minor version bumps. To help illustrate how
 versions will increment during this initial development stage, they are described below:
 
-1. The MAJOR version is currently 0, indicating initial development. 
-2. The MINOR version is currently incremented when backwards incompatible changes are introduced to the public API. 
-3. The PATCH version is currently incremented when bug fixes or backwards compatible changes are introduced to the public API. 
+1. The MAJOR version is currently 0, indicating initial development.
+2. The MINOR version is currently incremented when backwards incompatible changes are introduced to the public API.
+3. The PATCH version is currently incremented when bug fixes or backwards compatible changes are introduced to the public API.
 
 ## Security
 

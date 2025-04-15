@@ -1,3 +1,59 @@
+## 0.18.9 (2025-04-14)
+
+
+### Features
+* **adaptor**: Update Nuke environment variable to NUKE_EXECUTABLE (#178) ([`4af4fff`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/4af4fffa61a170f1dc2e1ea364f4a75ff43d32d4))
+* Nuke individual installer setup (#206) ([`f6ce5d7`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/f6ce5d7c6882333557d41db4adc451c9283355c9))
+
+### Bug Fixes
+* Add Windows support to GitHub Actions and skip OCIO tests on Win… (#217) ([`2296179`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/229617933bc9dc3e4ba93b249b264b145a81c5b1))
+* update test_installer.sh permissions to 755 (#215) ([`5bd1a70`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/5bd1a7000527c7ac080c2ac766a3892ae1e40674))
+* Fix individual installer build process (#210) ([`3167647`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/31676473833a41ced78145b5ef95d94f380e616b))
+* maintain backward compatibility with NUKE_ADAPTOR_NUKE_EXECUTABLE (#213) ([`eeb1390`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/eeb13906c7923dfe546196dccf2d9326c86d7def))
+* update changelog template to use correct element keys (#212) ([`561b825`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/561b825da5494135aa639a2e6068fffe963f7b60))
+* add continue on error option to submitter UI (#208) ([`0e1bdb2`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/0e1bdb267079081e643a7a96c8813235b1907d47))
+* Update UI labels to use consistent sentence case (#205) ([`8e02246`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/8e02246ec4cb573eb9bd3d3d93cc0153938e54fd))
+
+## 0.18.8 (2024-11-27)
+
+### Bug Fixes
+* Revert &#34;fix: Resolve menu.py not found error when installing via pip (#172)&#34; (#175)([`3d3a8e9`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/3d3a8e9b3acc77988c0967744d8031ebb12509c1))
+
+
+
+## 0.18.7 (2024-11-21)
+
+
+
+### Bug Fixes
+* Resolve menu.py not found error when installing via pip (#172) ([`9364964`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/9364964e50b02cda097df3866fa6c7bc755d7878))
+
+## 0.18.6 (2024-10-21)
+
+
+
+### Bug Fixes
+* Revert &#34;fix: Resolve menu.py not found error when running pip install deadline-cloud-for-nuke -t &lt;folder&gt; (#165)&#34; (#170) ([`71b8c8b`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/71b8c8b762f7f3a1999640a4e6a3d646e575146d))
+
+## 0.18.5 (2024-10-16)
+
+
+### Features
+* Handle different OCIO configs in adapter (#168) ([`5d55675`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/5d55675eab8e17155eb7a5044f9453b473700fb4))
+* Added support for including gizmos in job bundle (#162) ([`a0704a3`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/a0704a359d4e83daade6bf41b1b766886384c37d))
+
+### Bug Fixes
+* Add OCIO configuration to Job Environments (#166) ([`0eb87cb`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/0eb87cbdb1bf86dff2799b48ba4ef89c70341c21))
+* Resolve menu.py not found error when running pip install deadline-cloud-for-nuke -t &lt;folder&gt; (#165) ([`82b7eb2`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/82b7eb2d9f509a09c9974ec237a1031f4782847a))
+* Update frame range when write node is selected (#161) ([`e6398c9`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/e6398c919ae7faa099f007ad2195732958ac0f9a))
+
+## 0.18.4 (2024-08-12)
+
+
+
+### Bug Fixes
+* Update write nodes and views when refeshing the job settings ui (#151) ([`1175cc9`](https://github.com/aws-deadline/deadline-cloud-for-nuke/commit/1175cc9c4d71bbaeec49d707f40058feb6dba4f9))
+
 ## 0.18.3 (2024-05-29)
 
 

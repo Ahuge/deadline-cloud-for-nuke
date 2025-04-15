@@ -26,6 +26,7 @@ class RenderSubmitterUISettings:  # pylint: disable=too-many-instance-attributes
     write_node_selection: str = field(default="", metadata={"sticky": True})
     view_selection: str = field(default="", metadata={"sticky": True})
     is_proxy_mode: bool = field(default=False, metadata={"sticky": True})
+    continue_on_error: bool = field(default=False, metadata={"sticky": True})
 
     input_filenames: list[str] = field(default_factory=list, metadata={"sticky": True})
     input_directories: list[str] = field(default_factory=list, metadata={"sticky": True})
@@ -35,6 +36,8 @@ class RenderSubmitterUISettings:  # pylint: disable=too-many-instance-attributes
     on_run_timeout_seconds: int = field(default=518400, metadata={"sticky": True})  # 6 days
     on_enter_timeout_seconds: int = field(default=86400, metadata={"sticky": True})  # 1 day
     on_exit_timeout_seconds: int = field(default=3600, metadata={"sticky": True})  # 1 hour
+
+    include_gizmos_in_job_bundle: bool = field(default=False, metadata={"sticky": True})
 
     # developer options
     include_adaptor_wheels: bool = field(default=False, metadata={"sticky": True})

@@ -18,6 +18,21 @@ To develop this package, you'll need Python with `hatch` installed to start.
 hatch build
 ```
 
+### Build the installer
+
+```bash
+hatch run build-installer --local-dev-build --platform <PLATFORM> [--install-builder-location <LOCATION> --output-dir <DIR>]
+```
+
+Run `hatch run build-installer -h` to see the full list of arguments.
+
+...
+
+### Test a local installer
+```bash
+hatch run test-installer
+```
+
 ### Run tests
 
 ```bash
@@ -50,12 +65,71 @@ will work on Linux or MacOS if you modify the path references as appropriate.
 WARNING: This workflow installs additional Python packages into your Nuke's python distribution. You may need to run the Command Prompt in Administrative mode if your current user does not have permission to write on Nuke's site-package folder.
 
 1. Create a development location within which to do your git checkouts. For example `~/deadline-clients`. Clone packages from this directory with commands like `git clone git@github.com:aws-deadline/deadline-cloud-for-nuke.git`. You'll also want the `deadline-cloud` repo.
-2. Switch to your Nuke directory, like `cd "C:\Program Files\Nuke15.0v2"`.
-3. Run `.\python -m pip install -e C:\Users\<username>\deadline-clients\deadline-cloud` to install the AWS Deadline Cloud Client Library in edit mode.
-4. Run `.\python -m pip install -e C:\Users\<username>\deadline-clients\deadline-cloud-for-nuke` to install the Nuke Submitter in edit mode.
-5. Run `set NUKE_PATH=C:\Users\<username>\deadline-clients\deadline-cloud-for-nuke\src` to put the `menu.py` file in the path Nuke searches for menu extensions.
-6. Run `set DEADLINE_ENABLE_DEVELOPER_OPTIONS=true` to enable the job bundle debugging support. This enables a menu item you can use to run the tests from the `job_bundle_output_tests` directory.
-7. Run `.\Nuke<version>.exe` to run Nuke. The Nuke submitter should be available in the AWS Deadline menu.
+1. Switch to your Nuke directory, like `cd "C:\Program Files\Nuke15.0v2"`.
+
+   Windows (update the path as needed):
+   ```
+   cd "C:\Program Files\Nuke15.0v2"
+   ```
+
+   Mac (update the path as needed):
+   ```
+   cd /Applications/Nuke15.0v4/Nuke15.0v4.app/Contents/MacOS
+   ```
+1. Install the AWS Deadline Cloud Client Library in edit mode.
+
+   Windows (update the path as needed):
+   ```
+   .\python -m pip install -e C:\Users\<username>\deadline-clients\deadline-cloud
+   ```
+
+   Mac (update the path as needed):
+   ```
+   ./python -m pip install -e /Users/<username>/dev/deadline-clients/deadline-cloud
+   ```
+1. Run `.\python -m pip install -e C:\Users\<username>\deadline-clients\deadline-cloud-for-nuke` to install the Nuke Submitter in edit mode.
+
+   Windows (update the path as needed):
+   ```
+   .\python -m pip install -e C:\Users\<username>\deadline-clients\deadline-cloud-for-nuke
+   ```
+
+   Mac (update the path as needed):
+   ```
+   ./python -m pip install -e /Users/<username>/dev/deadline-clients/deadline-cloud-for-nuke
+   ```
+1. Put the `menu.py` file in the path Nuke searches for menu extensions. If you have already set your `NUKE_PATH` environment variable, append these paths to it instead of replacing it.
+
+   Windows (update the paths as needed):
+   ```
+   set NUKE_PATH=C:\Users\<username>\deadline-clients\deadline-cloud-for-nuke\src
+   ```
+
+   Mac (update the paths as needed):
+   ```
+   export NUKE_PATH=/Users/<username>/dev/deadline-clients/deadline-cloud-for-nuke/src
+   ```
+1. Set the `DEADLINE_ENABLE_DEVELOPER_OPTIONS` environment variable to `true` to enable the job bundle debugging support. This enables a menu item you can use to run the tests from the `job_bundle_output_tests` directory.
+
+   Windows:
+   ```
+   set DEADLINE_ENABLE_DEVELOPER_OPTIONS=true
+   ```
+
+   Mac:
+   ```
+   export DEADLINE_ENABLE_DEVELOPER_OPTIONS=true
+   ```
+1. Run Nuke. The Nuke submitter should be available in the AWS Deadline menu.
+   Windows:
+   ```
+   .\Nuke<version>.exe
+   ```
+
+   Mac:
+   ```
+   ./Nuke<version>
+   ```
 
 ## Application Interface Adaptor Development Workflow
 
@@ -123,6 +197,6 @@ You can run the adaptor on your local workstation. This approach does not contai
    nuke-openjd run --init-data file://init-data.yaml --run-data file://run-data.yaml --path-mapping-rules file://path-mapping.yaml
    ```
 
-   NOTE: The nuke-openjd binary expects that the Nuke executable is named `nuke` and is set on the PATH. If this is not the case, you can set the `NUKE_ADAPTOR_NUKE_EXECUTABLE` environment variable to the path to the Nuke executable.
+   NOTE: The nuke-openjd binary expects that the Nuke executable is named `nuke` and is set on the PATH. If this is not the case, you can set the `NUKE_EXECUTABLE` environment variable to the path to the Nuke executable.
 
 4. The result will be written based on the output specified on the write node, taking any path mapping into account.
