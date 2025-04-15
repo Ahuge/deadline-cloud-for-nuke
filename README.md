@@ -2,6 +2,9 @@
 [![python](https://img.shields.io/pypi/pyversions/deadline-cloud-for-nuke.svg?style=flat)](https://pypi.python.org/pypi/deadline-cloud-for-nuke)
 [![license](https://img.shields.io/pypi/l/deadline-cloud-for-nuke.svg?style=flat)](https://github.com/aws-deadline/deadline-cloud-for-nuke/blob/mainline/LICENSE)
 
+# Arch Updates
+- Naive callback loader for a VFX customer that needs to convert their sgtk nodes before going to the farm (Better solution in DEADLINE-CLOUD could be written)
+
 # AWS Deadline Cloud for Nuke
 
 AWS Deadline Cloud for Nuke is a python package that allows users to create [AWS Deadline Cloud][deadline-cloud] jobs from within Nuke. Using the [Open Job Description (OpenJD) Adaptor Runtime][openjd-adaptor-runtime] this package also provides a command line application that adapts Nuke's command line interface to support the [OpenJD specification][openjd].
